@@ -1,0 +1,86 @@
+.navBarContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 10px;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navBarItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+.img {
+  width: 50px;
+  height: 50px;
+}
+li {
+  font-size: 21px;
+  list-style: none;
+}
+input {
+  width: 300px;
+  height: 30px;
+  cursor: pointer;
+}
+.cardWrapper {
+  width: 220px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  /* border: 1px solid rgb(235, 232, 232); */
+}
+.cardWrapper:hover {
+  background-color: rgb(247, 248, 249);
+}
+.imgContainer {
+  height: 200px;
+  width: 200px;
+  border-radius: 20px;
+}
+.cuisines {
+  display: flex;
+}
+.app {
+}
+.cardWrapperConatiner{
+    display: flex;
+  flex-direction: column;
+}
+.card {
+  display: flex;
+  /* flex-direction: column; */
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.searchAndFilter{
+  display: flex;
+  gap: 20px;
+}
+.topRated{
+width: 100px;
+background-color: rgb(71, 88, 241);
+border-radius: 30px;
+cursor: pointer;
+}
+.shimmerOuter{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.shimmer{
+  height: 300px;
+  width: 250px;
+  background-color: rgb(240, 246, 244);
+}
