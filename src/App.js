@@ -3,10 +3,12 @@ import ReactDOM from "react-dom";
 import "../index.css";
 import Header from "./component/Header";
 import Body from "./component/Body";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import About from "./component/About";
 import Contact from "./component/Contact";
 import Error from "./component/Error";
+import Cart from "./component/Cart";
+import Restaurant from "./component/Restaurant";
 
 /*
 eg i want to create something like
@@ -34,7 +36,7 @@ const App = () => {
   return (
     <div className="app">
       <Header />
-      <Body />
+      <Outlet/>
     </div>
   );
 };
@@ -43,15 +45,30 @@ const Router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/restaurant/:restaurantId",
+        element: <Restaurant />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: Cart,
+      },
+    ],
   },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "contact",
-    element: <Contact />,
-  },
+
   { errorElement: <Error /> },
 ]);
 

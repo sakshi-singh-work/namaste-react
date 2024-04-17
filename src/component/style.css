@@ -1,0 +1,14 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+.restaurant-card {
+  margin-left: 20px;
+  width: 1000px;
+  height: 500px;
+  background-color:rgb(216, 189, 243);
+  border: 1px solid grey;
+  border-radius: 30px;
+  padding: 16px;
+  overflow-y: auto;
+}
