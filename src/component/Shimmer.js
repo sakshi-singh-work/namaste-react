@@ -1,19 +1,19 @@
-import React from 'react'
-import '../../index.css'
+import React from "react";
+import "../../index.css";
 
 const Shimmer = () => {
   return (
-    <div className="shimmerOuter">
-      <div className="shimmer"></div>
-      <div className="shimmer"></div>
-      <div className="shimmer"></div>
-      <div className="shimmer"></div>
-      <div className="shimmer"></div>
-      <div className="shimmer"></div>
-      <div className="shimmer"></div>
-      <div className="shimmer"></div>
+    <div className=" flex flex-wrap gap-5  p-4 m-6">
+      <div className=" w-80 h-96  bg-slate-100"></div>
+      <div className=" w-80 h-96  bg-slate-100"></div>
+      <div className=" w-80 h-96  bg-slate-100"></div>
+      <div className=" w-80 h-96  bg-slate-100"></div>
+      <div className=" w-80 h-96  bg-slate-100"></div>
+      <div className=" w-80 h-96  bg-slate-100"></div>
+      <div className=" w-80 h-96  bg-slate-100"></div>
+      <div className=" w-80 h-96  bg-slate-100"></div>
     </div>
   );
-}
+};
 
-export default Shimmer
+export default Shimmer;
