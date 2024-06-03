@@ -1,5 +1,5 @@
-import React,{Suspense, lazy} from "react";
-import ReactDOM from "react-dom";
+import React, { Suspense, lazy, useEffect, useState } from "react";
+import ReactDOM from "react-dom/client";
 import "../index.css";
 import Header from "./component/Header";
 import Body from "./component/Body";
@@ -9,6 +9,7 @@ import Error from "./component/Error";
 import Cart from "./component/Cart";
 import Restaurant from "./component/Restaurant";
 import useUserStatus from "./utils/useUserStatus";
+import LoggedInUser from "./utils/LoggedinUserContext";
 
 const About = lazy(() => import("./component/About"));
 
@@ -36,13 +37,27 @@ eg i want to create something like
 
 const App = () => {
   const userStatus = useUserStatus();
+  const [userName, setUserName] = useState(null);
+
+  useEffect(() => {
+    const data = { name: "Sakshi Singh" };
+    setUserName(data.name);
+  }, []);
+
   if (!userStatus) {
-    return <h1>Looks like you have lost your internet connection please try again</h1>;
+    return (
+      <h1>
+        Looks like you have lost your internet connection please try again
+      </h1>
+    );
   }
   return (
-    <div className="bg-black">
-      <Header />
-      <Outlet />
+    <div className="bg-slate-100">
+      <LoggedInUser.Provider value={userName}>
+        {/* value={{userName:username,age:26}} */}
+        <Header />
+        <Outlet />
+      </LoggedInUser.Provider>
     </div>
   );
 };

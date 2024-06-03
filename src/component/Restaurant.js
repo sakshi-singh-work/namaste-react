@@ -8,7 +8,7 @@ const Restaurant = () => {
   const { restaurantId } = useParams();
 
   const resData = useFetchResData(restaurantId);
-  console.log(resData);
+
   if (resData === null) return <Shimmer />;
 
   const {
@@ -20,31 +20,23 @@ const Restaurant = () => {
     locality,
   } = resData?.cards[2]?.card?.card?.info;
 
-  const { itemCards } =
-    resData?.cards[4]?.groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
-
+  const data = resData?.cards[4]?.groupedCard.cardGroupMap.REGULAR.cards.filter(
+    (element) =>
+      element?.card?.card["@type"] ==
+      "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  );
+console.log(data)
   return (
-    <div>
-      <h1>{name}</h1>
-      <div className="p-4 m-4  ">
+    <div className="text-center">
+      <h1 className="text-2xl p-4">{name}</h1>
+      <div className="text-lg">
         <h3>
           {avgRating} ({totalRatingsString}){costForTwoMessage}
         </h3>
         <div>{cuisines.join(",")}</div>
         <div>{locality}</div>
-        <h3>Menu</h3>
-        <div>
-          {itemCards?.map((menu) => {
-            return (
-              <div key={menu?.card?.info?.id}>
-                {menu?.card?.info?.name} - Rs.{" "}
-                {menu?.card?.info?.price / 100 ||
-                  menu?.card?.info?.defaultPrice / 100}
-              </div>
-            );
-          })}
-        </div>
       </div>
+      
     </div>
   );
 };

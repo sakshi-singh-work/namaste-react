@@ -3,6 +3,7 @@ import "../../index.css";
 import CardContainer from "./CardContainer";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import RestaurantPromoted from "./hoc/RestaurantPromoted";
 
 const Body = () => {
   const [resData, setResData] = useState([]);
@@ -14,7 +15,7 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5574028&lng=73.92830049999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
-    const data = await response.json();
+    const data = await response?.json();
     setResData(
       data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -22,6 +23,7 @@ const Body = () => {
       data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+  const Promoted = RestaurantPromoted(CardContainer);
 
   useEffect(() => {
     fetchData();
@@ -37,7 +39,12 @@ const Body = () => {
   return (
     <>
       <div className="flex gap-4 p-4 mx-20 ">
-        <div className=" bg-white pr-2">
+        <div>
+          <label className="text-orange-400 text-3xl">
+            What's on your mind?
+          </label>
+        </div>
+        <div className="bg-white pr-2 rounded-2xl">
           <input
             className="h-12 w-80 p-4 rounded-lg outline-none"
             type="text"
@@ -45,7 +52,9 @@ const Body = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <span onClick={()=>setSearchText('')} className=" cursor-pointer">╳</span>
+          <span onClick={() => setSearchText("")} className=" cursor-pointer">
+            ╳
+          </span>
         </div>
         <button
           onClick={() => {
@@ -54,26 +63,34 @@ const Body = () => {
                 .toLowerCase()
                 .includes(searchText.toLowerCase());
             });
-            console.log(searchData);
             setFilteredData(searchData);
           }}
-          className=" bg-green-300 px-4 rounded-lg"
+          className="bg-green-300 px-4 rounded-lg"
         >
           Search 🔎
         </button>
         <button
-          className=" bg-blue-300 px-4 rounded-lg"
+          className="bg-blue-300 px-4 rounded-lg"
           onClick={handleTopRated}
         >
           Top Rated ⭐️
         </button>
       </div>
-      <div className=" flex gap-24 flex-wrap p-4 shadow-lg ml-20 ">
-        {filteredData?.map((resData) => (
-          <Link to={"restaurant/" + resData?.info?.id} key={resData?.info?.id}>
-            <CardContainer data={resData} />
-          </Link>
-        ))}
+      <div className="flex gap-24 flex-wrap p-4 ml-20 ">
+        {filteredData?.map((resData) => {
+          return (
+            <Link
+              to={"restaurant/" + resData?.info?.id}
+              key={resData?.info?.id}
+            >
+              {resData?.info?.isOpen ? (
+                <Promoted data={resData} />
+              ) : (
+                <CardContainer data={resData} />
+              )}
+            </Link>
+          );
+        })}
       </div>
     </>
   );
